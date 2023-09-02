@@ -24,7 +24,7 @@ public class TestAddonRouterController {
     private AddonCollector addonCollector;
 
     /**
-     * http://127.0.0.1:8081/test/testBuyTicket?mode=2&com=CZ1
+     * http://127.0.0.1:8081/test/testBuyTicket?mode=2&com=CZ
      *
      * @param mode
      * @param com
