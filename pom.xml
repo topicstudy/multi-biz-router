@@ -1,22 +1,133 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>cn.topicstudy</groupId>
+    <!--required by sonatype start-->
+    <groupId>io.github.topicstudy</groupId>
     <artifactId>multi-biz-router</artifactId>
+    <version>${project-version}</version>
+    <description>route code logic according to business scenarios</description>
+    <name>io.github.topicstudy:multi-biz-router</name>
     <packaging>pom</packaging>
-    <version>1.0.0-SNAPSHOT</version>
+    <url>https://github.com/topicstudy/multi-biz-router</url>
+    <organization>
+        <name>topicstudy</name>
+        <url>https://topicstudy.cn</url>
+    </organization>
+    <properties>
+        <project-version>1.0.0-alpha.2</project-version>
+        <charset>UTF-8</charset>
+        <javaVersion>1.8</javaVersion>
+        <gpgKeyName>0x143D3FFA</gpgKeyName>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+    <scm>
+        <connection>scm:git:git@github.com:topicstudy/multi-biz-router.git</connection>
+        <developerConnection>scm:git:git@github.com:topicstudy/multi-biz-router.git</developerConnection>
+        <url>git@github.com:topicstudy/multi-biz-router.git</url>
+    </scm>
+    <developers>
+        <developer>
+            <name>topicstudy</name>
+            <email>topicstudy@163.com</email>
+            <url>https://topicstudy.cn</url>
+        </developer>
+    </developers>
+    <build>
+        <plugins>
+            <!--mvn basic plugin-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <source>${javaVersion}</source>
+                    <target>${javaVersion}</target>
+                    <encoding>${charset}</encoding>
+                </configuration>
+            </plugin>
+            <!--to generate signature file (.asc) for packaging results which will upload to the central repository,
+            required by sonatype-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                        <configuration>
+                            <!--If there are multiple gpg keys, the keyname be specified,
+                            list keyname by: gpg {dash x2} list-signatures {dash x2}keyid-format 0xshort
+                            the sig3 is keyname-->
+                            <keyname>${gpgKeyName}</keyname>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--to package out the source (artifactId-version-sources.jar), required by sonatype-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--to package out the javadoc (artifactId-version-javadoc.jar), required by sonatype-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <configuration>
+                    <charset>${charset}</charset>
+                    <encoding>${charset}</encoding>
+                    <excludePackageNames>cn.topicstudy</excludePackageNames>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+    <!--required by sonatype end-->
+
     <modules>
         <module>multi-biz-router-core</module>
         <module>multi-biz-router-test</module>
     </modules>
-
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
 
     <dependencyManagement>
         <dependencies>
@@ -45,5 +156,55 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
 </project>
+
+
+        <!--        <?xml version="1.0" encoding="UTF-8"?>-->
+        <!--<project xmlns="http://maven.apache.org/POM/4.0.0"-->
+        <!--         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+        <!--         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">-->
+        <!--<modelVersion>4.0.0</modelVersion>-->
+
+        <!--<groupId>cn.topicstudy</groupId>-->
+        <!--<artifactId>multi-biz-router</artifactId>-->
+        <!--<packaging>pom</packaging>-->
+        <!--<version>1.0.0-SNAPSHOT</version>-->
+        <!--<modules>-->
+        <!--    <module>multi-biz-router-core</module>-->
+        <!--    <module>multi-biz-router-test</module>-->
+        <!--</modules>-->
+
+        <!--<properties>-->
+        <!--    <maven.compiler.source>8</maven.compiler.source>-->
+        <!--    <maven.compiler.target>8</maven.compiler.target>-->
+        <!--</properties>-->
+
+        <!--<dependencyManagement>-->
+        <!--    <dependencies>-->
+        <!--        <dependency>-->
+        <!--            <groupId>io.github.topicstudy</groupId>-->
+        <!--            <artifactId>jutil</artifactId>-->
+        <!--            <version>3.2.0-SNAPSHOT</version>-->
+        <!--        </dependency>-->
+
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-starter</artifactId>-->
+        <!--            <version>2.7.8</version>-->
+        <!--        </dependency>-->
+
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-starter-web</artifactId>-->
+        <!--            <version>2.7.8</version>-->
+        <!--        </dependency>-->
+
+        <!--        <dependency>-->
+        <!--            <groupId>junit</groupId>-->
+        <!--            <artifactId>junit</artifactId>-->
+        <!--            <version>4.13.2</version>-->
+        <!--        </dependency>-->
+        <!--    </dependencies>-->
+        <!--</dependencyManagement>-->
+
+        <!--</project>-->
