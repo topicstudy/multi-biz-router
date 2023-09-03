@@ -17,7 +17,7 @@
         <url>https://topicstudy.cn</url>
     </organization>
     <properties>
-        <project-version>1.0.0-alpha.2</project-version>
+        <project-version>1.0.0-alpha.3</project-version>
         <charset>UTF-8</charset>
         <javaVersion>1.8</javaVersion>
         <gpgKeyName>0x143D3FFA</gpgKeyName>
